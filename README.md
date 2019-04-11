@@ -1,4 +1,21 @@
 ## Individual Project: Python Todo List CLI
+
+### DATA SCHEMA: 3 TABLES
+1. todos
+| id  | text          | due_date   | status| user_id|
+| --- |:-------------:| ----------:| -----:|  -----:|
+| 1   | sql assigment | 2019-04-10 | 0     |  1     |
+
+2. projects
+| id  | name          | due_date   | 
+| --- |:-------------:| ----------:| 
+| 1   | sql project   | 2019-04-10 | 
+3. user
+| id  | name     | email       | 
+| --- |:--------:| -----------:| 
+| 1   | k        | k@gmail.com | 
+
+
 ### Requirements
 - [x] The user can run your program from the command line.
 - [ ] If the user does not supply the correct arguments, or supplies a --help flag, the user sees a "usage" message. 
@@ -23,21 +40,7 @@
 - [ ] The user can call a staff command that shows each project, combined with each of the users working on that project.
 - [ ] The user can call a who_to_fire command that lists all users who are not currently assigned a todo.
 
-### DATA SCHEMA: 3 TABLES
-1. todos
-| id | text          | due_date   | status| user_id|
-| -- |:-------------:| ----------:| -----:|  -----:|
-| 1  | sql assigment | 2019-04-10 | 0     |  1     |
 
-2. projects
-| id | name          | due_date   | 
-| -- |:-------------:| ----------:| 
-| 1  | sql project   | 2019-04-10 | 
-3. user
-id | name | email | 
-| id | name     | email       | 
-| -- |:--------:| -----------:| 
-| 1  | k        | k@gmail.com | 
 
 Additional Screenshots
 Reference Reading and Tools
