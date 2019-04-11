@@ -25,11 +25,19 @@
 
 ### DATA SCHEMA: 3 TABLES
 1. todos
-id | text | due_date | project_id | status | user_id
+| id | text          | due_date   | status| user_id|
+| -- |:-------------:| ----------:| -----:|  -----:|
+| 1  | sql assigment | 2019-04-10 | 0     |  1     |
+
 2. projects
-id | name | 
+| id | name          | due_date   | 
+| -- |:-------------:| ----------:| 
+| 1  | sql project   | 2019-04-10 | 
 3. user
 id | name | email | 
+| id | name     | email       | 
+| -- |:--------:| -----------:| 
+| 1  | k        | k@gmail.com | 
 
 Additional Screenshots
 Reference Reading and Tools
