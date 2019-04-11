@@ -41,7 +41,7 @@
 - [x] The user can add a user to the system by passing add_user. Each user should have a name, email_address, and id. 
 - [x] The user can call a list_users command that shows all the users in the system.
 - [x] The user can call a staff command that shows each project, combined with each of the users working on that project.
-- [ ] The user can call a who_to_fire command that lists all users who are not currently assigned a todo.
+- [x] The user can call a who_to_fire command that lists all users who are not currently assigned a todo.
 
 
 
