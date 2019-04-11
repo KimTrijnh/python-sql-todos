@@ -108,10 +108,9 @@ def list(status, project_id, order):
     else: 
         sql="""
         SELECT * FROM todos 
-        WHERE status={}
-        ORDER BY due_date ASC
-        """.format(status,)
-    
+        WHERE status={} AND project_id={}
+        ORDER BY due_date {}
+        """.format(status, project_id, order,)
     cur = con.cursor()
     cur.execute(sql)
     con.commit
@@ -120,10 +119,40 @@ def list(status, project_id, order):
         print(i)
     con.close()
 
-def test():
-    a="hi"
-    sql="""abc""" + a+  """ztz"""
-    print(sql)
+#TABLE projects
+def create_tb_project():
+    con = db_connect()
+    sql="""
+    CREATE TABLE IF NOT EXISTS projects (
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        due_date DATE
+    )
+    """
+    cur = con.cursor()
+    cur.execute(sql)
+    con.commit()
+    con.close()
+
+def add_project(name, due_date):
+    con=db_connect()
+    sql="""
+    INSERT INTO projects (name, due_date)
+    VALUES (?, ?)
+    """
+    cur = con.cursor()
+    cur.execute(sql,(name, due_date))
+    con.commit()
+
+    select_sql="""
+    SELECT * FROM projects
+    """
+    con = cur.execute(select_sql)
+    result=cur.fetchall()
+    print(result)
+    for row in result:
+        print(row)
+    con.close()
 
 if __name__ == '__main__':
   fire.Fire()

@@ -21,7 +21,7 @@
 
 ### Requirements
 - [x] The user can run your program from the command line.
-- [ ] If the user does not supply the correct arguments, or supplies a --help flag, the user sees a "usage" message. 
+- [x] If the user does not supply the correct arguments, or supplies a --help flag, the user sees a "usage" message. 
 - [x] The user can add a todo from the command line, by calling add_todo. The fields specified should be text, due_date, and project_id. The fields due_date and project_id are optional. Text is required.
 - [x] Todos added, by default should be marked as incomplete.
 - [x] The user should see a message giving information about the todo that was added.
@@ -33,8 +33,8 @@
 - [x] The user can supply arguments to the list command to combine the above options.
 
 ### Optional Requirements
-- [ ] The user can add a project by calling add_project. Each project must have a name. 
-- [ ] The user can see all projects from the command line.
+- [x] The user can add a project by calling add_project. Each project must have a name. 
+- [x] The user can see all projects from the command line.
 
 ### Bonus Requirements
 - [ ] The user can add a user_id to each todo. 
