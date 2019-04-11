@@ -27,25 +27,25 @@ def create_db():
     con.close()
 
 
-def add_todo(text, due_date, project_id, status):
+def add_todo(text, due_date, project_id):
     con = db_connect()
     sql="""
-    INSERT INTO todos (text, due_date, project_id, status)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO todos (text, due_date, project_id)
+    VALUES (?, ?, ?)
     """
     cur = con.cursor()
-    cur.execute(sql, (text, due_date, project_id, status))
+    cur.execute(sql, (text, due_date, project_id))
     con.commit()
 
     my_sql="""
     SELECT * FROM todos
     """ 
     cur.execute(my_sql)
+    print('new todo is added')
     result = cur.fetchall()
     for row in result:
         print(row)
     con.close()
-    print('new todo is added')
 
 
 def remove_all_row(table_name):
@@ -59,6 +59,7 @@ def remove_all_row(table_name):
     con.close()
     print('all row deleted', table_name)    
 
+
 def add_column(table_name, column):
     con= db_connect()
     sql="""
@@ -71,6 +72,19 @@ def add_column(table_name, column):
     con.close()
     print('new collum', column, 'is added to', table_name)
 
+def update_row(table_name, update_set, id):
+    con = db_connect()
+    sql="""
+    UPDATE {}
+    SET {}
+    WHERE id={}
+    """.format(table_name, update_set, id,)
+    cur = con.cursor()
+    cur.execute(sql)
+    print('row', id, 'is updated')
+    print(sql)
+    con.commit()
+    con.close()
 
 def mark_completed(table_name, id):
     con= db_connect()
@@ -85,18 +99,31 @@ def mark_completed(table_name, id):
     con.close()
     print(id, 'completed')
 
-def toggle_completed(table_name, id):
-    con= db_connect()
-    status_sql="""
-    SELECT id FROM {}
-    WHERE id=?
-    """
-    toggle_status_sql="""
-    UPDATE {}
-    SET status={}
-    WHERE id=?
-    """
+def list(status, project_id, order):
+    con = db_connect()
+    if status == 'all':
+        sql="""
+        SELECT * FROM todos
+        """
+    else: 
+        sql="""
+        SELECT * FROM todos 
+        WHERE status={}
+        ORDER BY due_date ASC
+        """.format(status,)
     
+    cur = con.cursor()
+    cur.execute(sql)
+    con.commit
+    result = cur.fetchall()
+    for i in result:
+        print(i)
+    con.close()
+
+def test():
+    a="hi"
+    sql="""abc""" + a+  """ztz"""
+    print(sql)
 
 if __name__ == '__main__':
   fire.Fire()
