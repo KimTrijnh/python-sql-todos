@@ -134,6 +134,39 @@ def create_tb_project():
     con.commit()
     con.close()
 
+def create_tb_users():
+    con = db_connect()
+    sql="""
+    CREATE TABLE IF NOT EXISTS users(
+        id INTEGER PRIMARY KEY,
+        name text NOT NULL,
+        email text
+    )
+    """
+    cur= con.cursor()
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    print('table_users is created')   
+
+def add_user(name, email):
+    con =db_connect()
+    sql="""
+    INSERT INTO users (name, email)
+    VALUES (?, ?)
+    """
+    cur=con.cursor()
+    cur.execute(sql,(name, email))
+    con.commit()
+    select_sql="""
+    SELECT * FROM users
+    """
+    result= cur.execute(select_sql)
+    for row in result:
+        print(row)
+    con.close()
+    print('user', name, 'created')
+
 def add_project(name, due_date):
     con=db_connect()
     sql="""
@@ -149,6 +182,86 @@ def add_project(name, due_date):
     """
     con = cur.execute(select_sql)
     result=cur.fetchall()
+    print(result)
+    for row in result:
+        print(row)
+    con.close()
+
+
+def add_user_id_column():
+    con = db_connect()
+    sql="""
+    ALTER TABLE todos
+    ADD user_id int
+    """
+    cur = con.cursor()
+    cur.execute(sql)
+    con.commit()
+    con.close()
+    print('user_id addted to todos')
+
+
+def assign_user(user_id, id):
+    con=db_connect()
+    sql="""
+    UPDATE TABLE todos
+    SET user_id={}
+    WHERE id={}
+    """.format(user_id, id)
+    cur=con.cursor()
+    cur.execute(sql, )
+    con.commit()
+    con.close()
+    print('user_id', user_id)
+
+#def add_user_id()
+# def add_foreign_key():
+#     con = db_connect()
+#     sql="""
+#     ALTER TABLE todos
+#     ADD FOREIGN KEY (user_id) REFERENCES user(id)
+#     """
+#     cur = con.cursor()
+#     cur.execute(sql)
+#     con.commit()
+#     con.close()
+
+def alter_colum():
+    con=db_connect()
+    sql="""
+    ALTER TABLE users
+    ADD CONSTRAINT userId PRIMARY KEY (id);
+    """
+    cur =con.cursor()
+    cur.execute(sql)
+    con.commit()
+    con.close()
+
+
+def staff():
+    con= db_connect()
+    sql="""
+    SELECT project_id, user_id FROM 
+    todos JOIN users
+    WHERE todos.user_id = users.id
+    ORDER BY project_id ASC
+    """
+    cur=con.cursor()
+    result = cur.execute(sql)
+    for row in result:
+        print(row)
+    con.close()
+    
+def who_to_fire():
+    con=db_connect()
+    sql="""
+    SELECT users.id, users.name FROM
+    users LEFT JOIN todos
+    ON users.id=todos.user_id
+    WHERE project_id IS NULL
+    """
+    cur = con.cursor()
+    result= cur.execute(sql)
     print(result)
     for row in result:
         print(row)
